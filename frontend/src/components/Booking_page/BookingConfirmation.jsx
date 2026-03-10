@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { hotels, cities } from "../../data/rajasthanData";
+import { TopNav } from "../shared/TopNav";
 import styled from "styled-components";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
@@ -9,40 +10,7 @@ const PageWrapper = styled.div`
   background: #FDF2E9;
   min-height: 100vh;
 
-  .top-bar {
-    background: white;
-    padding: 14px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 2px 12px rgba(44, 24, 16, 0.06);
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #C0392B;
-      text-decoration: none;
-
-      h3 {
-        font-family: 'Playfair Display', serif;
-        font-size: 20px;
-      }
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 20px;
-
-      a {
-        color: #5D4E37;
-        font-size: 14px;
-        font-weight: 500;
-        transition: color 0.3s;
-        &:hover { color: #C0392B; }
-      }
-    }
-  }
 
   .confirmation-content {
     max-width: 700px;
@@ -229,16 +197,7 @@ export const BookingConfirmation = () => {
 
     return (
         <PageWrapper>
-            <div className="top-bar">
-                <Link to="/" className="brand">
-                    <AccountBalanceIcon style={{ fontSize: 22 }} />
-                    <h3>Rajasthan Stays</h3>
-                </Link>
-                <div className="nav-links">
-                    <Link to="/">Home</Link>
-                    <Link to="/search">Hotels</Link>
-                </div>
-            </div>
+            <TopNav />
 
             <div className="confirmation-content">
                 <CheckCircleIcon className="success-icon" style={{ fontSize: 80 }} />

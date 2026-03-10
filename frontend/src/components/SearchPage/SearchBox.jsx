@@ -114,16 +114,6 @@ const Style = styled.div`
 export const SearchBox = ({ filters, onFilter }) => {
   return (
     <Style>
-      <div className="top-bar">
-        <Link to="/" className="brand">
-          <AccountBalanceIcon style={{ fontSize: 22 }} />
-          <h3>Rajasthan Stays</h3>
-        </Link>
-        <div className="nav-links">
-          <Link to="/">Home</Link>
-          <Link to="/search">Explore Hotels</Link>
-        </div>
-      </div>
       <div className="search-bar">
         <div className="field">
           <label>Destination</label>

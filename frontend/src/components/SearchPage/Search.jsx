@@ -1,4 +1,4 @@
-import { Header } from "./Header";
+import { TopNav } from "../shared/TopNav";
 import { SearchBox } from "./SearchBox";
 import { Bottom } from "./Bottom";
 import { useState, useEffect } from "react";
@@ -59,7 +59,7 @@ export const Search = () => {
 
   return (
     <>
-      <Header />
+      <TopNav />
       <SearchBox filters={filters} onFilter={handleFilter} />
       <Bottom data={filteredHotels} filters={filters} onFilter={handleFilter} />
     </>

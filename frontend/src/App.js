@@ -3,6 +3,9 @@ import { Main } from "./components/HomePage/Main";
 import { Search } from "./components/SearchPage/Search";
 import { HotelDetail } from "./components/Booking_page/HotelDetail";
 import { BookingConfirmation } from "./components/Booking_page/BookingConfirmation";
+import { CarRentalsPage } from "./components/CarRentals/CarRentalsPage";
+import { DesertSafariPage } from "./components/DesertSafari/DesertSafariPage";
+import { PackagesPage } from "./components/Packages/PackagesPage";
 
 function App() {
   return (
@@ -12,6 +15,9 @@ function App() {
         <Route path="/search" exact element={<Search />} />
         <Route path="/hotel/:id" exact element={<HotelDetail />} />
         <Route path="/booking/:id" exact element={<BookingConfirmation />} />
+        <Route path="/car-rentals" exact element={<CarRentalsPage />} />
+        <Route path="/desert-safari" exact element={<DesertSafariPage />} />
+        <Route path="/packages" exact element={<PackagesPage />} />
       </Routes>
     </div>
   );
