@@ -182,7 +182,6 @@ export const BookingConfirmation = () => {
         if (found) setItem(found);
     }, [id, type]);
 
-    const savedBooking = localStorage.getItem("bookingData");
 
     if (!item) {
         return (
