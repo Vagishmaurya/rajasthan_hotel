@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { TopNav } from "../shared/TopNav";
 import { Bottom } from "../HomePage/Bottom";
-import { popularPackages, cities, desertSafaris } from "../../data/rajasthanData";
+import { popularPackages, cities } from "../../data/rajasthanData";
 import styled from "styled-components";
 import StarIcon from "@mui/icons-material/Star";
 import GroupIcon from "@mui/icons-material/Group";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import FlightIcon from "@mui/icons-material/Flight";
 import HotelIcon from "@mui/icons-material/Hotel";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
@@ -135,170 +134,170 @@ const Content = styled.div`
 `;
 
 const itineraries = {
-    1: [
-        { day: "Day 1-2", place: "Jaipur" },
-        { day: "Day 3-4", place: "Jodhpur" },
-        { day: "Day 5-6", place: "Jaisalmer" },
-        { day: "Day 7-8", place: "Udaipur" },
-        { day: "Day 9-10", place: "Jaipur" },
-    ],
-    2: [
-        { day: "Day 1-2", place: "Jodhpur" },
-        { day: "Day 3-4", place: "Jaisalmer" },
-        { day: "Day 5", place: "Return" },
-    ],
-    3: [
-        { day: "Day 1-2", place: "Udaipur" },
-        { day: "Day 3-4", place: "Mount Abu" },
-    ],
-    4: [
-        { day: "Day 1-2", place: "Jaipur" },
-        { day: "Day 3-4", place: "Ajmer" },
-        { day: "Day 5-6", place: "Pushkar" },
-    ],
+  1: [
+    { day: "Day 1-2", place: "Jaipur" },
+    { day: "Day 3-4", place: "Jodhpur" },
+    { day: "Day 5-6", place: "Jaisalmer" },
+    { day: "Day 7-8", place: "Udaipur" },
+    { day: "Day 9-10", place: "Jaipur" },
+  ],
+  2: [
+    { day: "Day 1-2", place: "Jodhpur" },
+    { day: "Day 3-4", place: "Jaisalmer" },
+    { day: "Day 5", place: "Return" },
+  ],
+  3: [
+    { day: "Day 1-2", place: "Udaipur" },
+    { day: "Day 3-4", place: "Mount Abu" },
+  ],
+  4: [
+    { day: "Day 1-2", place: "Jaipur" },
+    { day: "Day 3-4", place: "Ajmer" },
+    { day: "Day 5-6", place: "Pushkar" },
+  ],
 };
 
 const includeIcons = {
-    "Hotels": <HotelIcon />,
-    "Car": <DirectionsCarIcon />,
-    "Safari": <CameraAltIcon />,
-    "Meals": <RestaurantIcon />,
-    "Guide": <GroupIcon />,
-    "Luxury Hotel": <HotelIcon />,
-    "Jeep Safari": <DirectionsCarIcon />,
-    "Desert Camp": <CameraAltIcon />,
-    "Transport": <DirectionsCarIcon />,
-    "Temple Tours": <LocationOnIcon />,
-    "Boat Ride": <CameraAltIcon />,
-    "Dinner": <RestaurantIcon />,
+  "Hotels": <HotelIcon />,
+  "Car": <DirectionsCarIcon />,
+  "Safari": <CameraAltIcon />,
+  "Meals": <RestaurantIcon />,
+  "Guide": <GroupIcon />,
+  "Luxury Hotel": <HotelIcon />,
+  "Jeep Safari": <DirectionsCarIcon />,
+  "Desert Camp": <CameraAltIcon />,
+  "Transport": <DirectionsCarIcon />,
+  "Temple Tours": <LocationOnIcon />,
+  "Boat Ride": <CameraAltIcon />,
+  "Dinner": <RestaurantIcon />,
 };
 
 export const PackagesPage = () => {
-    const [durationFilter, setDurationFilter] = useState("");
+  const [durationFilter, setDurationFilter] = useState("");
 
-    const filtered = durationFilter
-        ? popularPackages.filter(p => p.duration.includes(durationFilter))
-        : popularPackages;
+  const filtered = durationFilter
+    ? popularPackages.filter(p => p.duration.includes(durationFilter))
+    : popularPackages;
 
-    return (
-        <div>
-            <TopNav />
-            <HeroBanner>
-                <h1>Tours & Holiday Packages</h1>
-                <p>Complete holiday packages with hotels, transport, safaris, meals & expert guides — all in one booking</p>
-                <div className="filter-bar">
-                    <div className="field">
-                        <label>Destination</label>
-                        <select>
-                            <option value="">All Destinations</option>
-                            {cities.map(c => <option value={c.name} key={c.id}>{c.name}</option>)}
-                        </select>
-                    </div>
-                    <div className="field">
-                        <label>Duration</label>
-                        <select value={durationFilter} onChange={e => setDurationFilter(e.target.value)}>
-                            <option value="">Any Duration</option>
-                            <option value="4 Days">3-5 Days</option>
-                            <option value="5 Days">5-7 Days</option>
-                            <option value="10 Days">8+ Days</option>
-                        </select>
-                    </div>
-                    <div className="field">
-                        <label>Budget</label>
-                        <select>
-                            <option>Any Budget</option>
-                            <option>Under ₹20,000</option>
-                            <option>₹20,000 - ₹40,000</option>
-                            <option>Above ₹40,000</option>
-                        </select>
-                    </div>
-                    <button className="search-btn">Find Packages</button>
-                </div>
-                <div className="badge-row">
-                    <div className="badge"><CheckCircleIcon /> Verified Partners</div>
-                    <div className="badge"><StarIcon /> 4.8 Avg Rating</div>
-                    <div className="badge"><GroupIcon /> 3,200+ Booked</div>
-                    <div className="badge"><AccessTimeIcon /> Customizable</div>
-                </div>
-            </HeroBanner>
-
-            <Content>
-                <div className="page-inner">
-                    <div className="section-title">
-                        <h2>Curated Rajasthan Packages</h2>
-                        <p>Designed by local experts for the most authentic royal experience</p>
-                        <div className="line" />
-                    </div>
-
-                    <div className="packages-list">
-                        {filtered.map(pkg => {
-                            const discount = Math.round((1 - pkg.price / pkg.originalPrice) * 100);
-                            const saving = pkg.originalPrice - pkg.price;
-                            return (
-                                <div className="package-card" key={pkg.id}>
-                                    <div className="pkg-img">
-                                        <img src={pkg.image} alt={pkg.name} />
-                                        {pkg.bookings > 1000 && <div className="best-seller">★ Best Seller</div>}
-                                        <div className="discount">{discount}% OFF</div>
-                                    </div>
-                                    <div className="pkg-info">
-                                        <div className="pkg-header">
-                                            <h3>{pkg.name}</h3>
-                                            <span className="duration"><AccessTimeIcon style={{ fontSize: 14 }} /> {pkg.duration}</span>
-                                        </div>
-                                        <p className="cities-route"><LocationOnIcon style={{ fontSize: 16, color: '#8E44AD' }} /> {pkg.cities.join(" → ")}</p>
-
-                                        <div className="includes-grid">
-                                            {pkg.includes.map((inc, i) => (
-                                                <div className="include-item" key={i}>
-                                                    {includeIcons[inc] || <CheckCircleIcon />}
-                                                    <span>{inc}</span>
-                                                </div>
-                                            ))}
-                                        </div>
-
-                                        {itineraries[pkg.id] && (
-                                            <div className="itinerary-preview">
-                                                <h4>Itinerary Preview</h4>
-                                                <div className="days">
-                                                    {itineraries[pkg.id].map((d, i) => (
-                                                        <div className="day" key={i}>
-                                                            <strong>{d.day}</strong>
-                                                            {d.place}
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        )}
-
-                                        <div className="meta-row">
-                                            <span className="meta"><StarIcon /> {pkg.rating} rating</span>
-                                            <span className="meta"><GroupIcon /> {pkg.bookings.toLocaleString()} booked</span>
-                                        </div>
-
-                                        <div className="price-row">
-                                            <div className="price">
-                                                <span className="original">₹{pkg.originalPrice.toLocaleString()}</span>
-                                                <span className="current">₹{pkg.price.toLocaleString()}</span>
-                                                <span className="per">per person</span>
-                                                <span className="save">You save ₹{saving.toLocaleString()}</span>
-                                            </div>
-                                            <button className="book-btn">Book Package</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
-
-                    <div className="build-custom">
-                        <h2>Can't Find the Perfect Package?</h2>
-                        <p>Our travel experts will craft a custom itinerary tailored to your preferences, budget, and schedule</p>
-                        <button className="cta-btn">Build Custom Package →</button>
-                    </div>
-                </div>
-            </Content>
-            <Bottom />
+  return (
+    <div>
+      <TopNav />
+      <HeroBanner>
+        <h1>Tours & Holiday Packages</h1>
+        <p>Complete holiday packages with hotels, transport, safaris, meals & expert guides — all in one booking</p>
+        <div className="filter-bar">
+          <div className="field">
+            <label>Destination</label>
+            <select>
+              <option value="">All Destinations</option>
+              {cities.map(c => <option value={c.name} key={c.id}>{c.name}</option>)}
+            </select>
+          </div>
+          <div className="field">
+            <label>Duration</label>
+            <select value={durationFilter} onChange={e => setDurationFilter(e.target.value)}>
+              <option value="">Any Duration</option>
+              <option value="4 Days">3-5 Days</option>
+              <option value="5 Days">5-7 Days</option>
+              <option value="10 Days">8+ Days</option>
+            </select>
+          </div>
+          <div className="field">
+            <label>Budget</label>
+            <select>
+              <option>Any Budget</option>
+              <option>Under ₹20,000</option>
+              <option>₹20,000 - ₹40,000</option>
+              <option>Above ₹40,000</option>
+            </select>
+          </div>
+          <button className="search-btn">Find Packages</button>
         </div>
-    );
+        <div className="badge-row">
+          <div className="badge"><CheckCircleIcon /> Verified Partners</div>
+          <div className="badge"><StarIcon /> 4.8 Avg Rating</div>
+          <div className="badge"><GroupIcon /> 3,200+ Booked</div>
+          <div className="badge"><AccessTimeIcon /> Customizable</div>
+        </div>
+      </HeroBanner>
+
+      <Content>
+        <div className="page-inner">
+          <div className="section-title">
+            <h2>Curated Rajasthan Packages</h2>
+            <p>Designed by local experts for the most authentic royal experience</p>
+            <div className="line" />
+          </div>
+
+          <div className="packages-list">
+            {filtered.map(pkg => {
+              const discount = Math.round((1 - pkg.price / pkg.originalPrice) * 100);
+              const saving = pkg.originalPrice - pkg.price;
+              return (
+                <div className="package-card" key={pkg.id}>
+                  <div className="pkg-img">
+                    <img src={pkg.image} alt={pkg.name} />
+                    {pkg.bookings > 1000 && <div className="best-seller">★ Best Seller</div>}
+                    <div className="discount">{discount}% OFF</div>
+                  </div>
+                  <div className="pkg-info">
+                    <div className="pkg-header">
+                      <h3>{pkg.name}</h3>
+                      <span className="duration"><AccessTimeIcon style={{ fontSize: 14 }} /> {pkg.duration}</span>
+                    </div>
+                    <p className="cities-route"><LocationOnIcon style={{ fontSize: 16, color: '#8E44AD' }} /> {pkg.cities.join(" → ")}</p>
+
+                    <div className="includes-grid">
+                      {pkg.includes.map((inc, i) => (
+                        <div className="include-item" key={i}>
+                          {includeIcons[inc] || <CheckCircleIcon />}
+                          <span>{inc}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {itineraries[pkg.id] && (
+                      <div className="itinerary-preview">
+                        <h4>Itinerary Preview</h4>
+                        <div className="days">
+                          {itineraries[pkg.id].map((d, i) => (
+                            <div className="day" key={i}>
+                              <strong>{d.day}</strong>
+                              {d.place}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="meta-row">
+                      <span className="meta"><StarIcon /> {pkg.rating} rating</span>
+                      <span className="meta"><GroupIcon /> {pkg.bookings.toLocaleString()} booked</span>
+                    </div>
+
+                    <div className="price-row">
+                      <div className="price">
+                        <span className="original">₹{pkg.originalPrice.toLocaleString()}</span>
+                        <span className="current">₹{pkg.price.toLocaleString()}</span>
+                        <span className="per">per person</span>
+                        <span className="save">You save ₹{saving.toLocaleString()}</span>
+                      </div>
+                      <button className="book-btn">Book Package</button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="build-custom">
+            <h2>Can't Find the Perfect Package?</h2>
+            <p>Our travel experts will craft a custom itinerary tailored to your preferences, budget, and schedule</p>
+            <button className="cta-btn">Build Custom Package →</button>
+          </div>
+        </div>
+      </Content>
+      <Bottom />
+    </div>
+  );
 };

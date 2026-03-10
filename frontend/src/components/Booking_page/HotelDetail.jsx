@@ -3,7 +3,6 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { TopNav } from "../shared/TopNav";
 import { hotels, cities } from "../../data/rajasthanData";
 import styled from "styled-components";
-import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import StarIcon from "@mui/icons-material/Star";
 import WifiIcon from "@mui/icons-material/Wifi";
 import PoolIcon from "@mui/icons-material/Pool";

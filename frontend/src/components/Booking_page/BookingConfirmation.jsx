@@ -2,7 +2,6 @@ import { useParams, Link } from "react-router-dom";
 import { hotels, cities } from "../../data/rajasthanData";
 import { TopNav } from "../shared/TopNav";
 import styled from "styled-components";
-import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import StarIcon from "@mui/icons-material/Star";
 

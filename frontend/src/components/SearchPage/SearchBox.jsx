@@ -1,7 +1,5 @@
 import styled from "styled-components";
 import { cities } from "../../data/rajasthanData";
-import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
-import { Link } from "react-router-dom";
 
 const Style = styled.div`
   background: linear-gradient(135deg, #922B21 0%, #C0392B 40%, #E67E22 100%);
