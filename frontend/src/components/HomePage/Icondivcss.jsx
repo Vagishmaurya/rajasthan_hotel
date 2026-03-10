@@ -1,27 +1,36 @@
-import styled from 'styled-components'
+import styled from "styled-components";
+
 export const Icondivcss = styled.div`
-.icondiv{
-    height:74px;
-    width:74%;
-    padding-top: 5px;
-    margin: auto;
-    background: white;
-    border-radius: 8px;
+  .icondiv {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    text-align: center;
-    box-shadow: 1px 3px 5px #c0c0c0;
-    p{padding:0px; margin:-6px;color: #555454;font-size:13px;}
-    span{
-        color: #a3a3a3;
-        cursor: pointer;
+    justify-content: center;
+    gap: 40px;
+    padding: 16px 0 8px;
+
+    div {
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 12px;
+
+      &:hover {
+        background: rgba(212, 160, 23, 0.1);
+        transform: translateY(-2px);
+      }
     }
-    span:hover{
-        color: #2db0fc;
+
+    span {
+      color: #D4A017;
     }
-    div:hover{
-        color: #2db0fc;
+
+    p {
+      font-size: 12px;
+      font-weight: 600;
+      color: white;
+      margin-top: 4px;
+      letter-spacing: 0.5px;
     }
-}
-`
+  }
+`;

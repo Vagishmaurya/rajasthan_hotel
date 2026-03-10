@@ -1,156 +1,91 @@
-import FlightIcon from "@mui/icons-material/Flight";
 import HotelIcon from "@mui/icons-material/Hotel";
 import HomeWorkIcon from "@mui/icons-material/HomeWork";
-import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
-import TrainIcon from "@mui/icons-material/Train";
-import DirectionsBusFilledIcon from "@mui/icons-material/DirectionsBusFilled";
-import LocalTaxiIcon from "@mui/icons-material/LocalTaxi";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
-import DownhillSkiingIcon from "@mui/icons-material/DownhillSkiing";
-import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
+import SpaIcon from "@mui/icons-material/Spa";
+import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { Login } from "../login/Login";
+
 const Icondivcss = styled.div`
   .icondiv {
     height: 60px;
-    margin-top: 20px;
     width: 100%;
     margin: auto;
     background-color: white;
     display: flex;
     flex-direction: row;
+    align-items: center;
     position: sticky;
+    top: 0;
     z-index: 100;
-    text-align: center;
+    box-shadow: 0 2px 12px rgba(44, 24, 16, 0.08);
+
+    .brand-small {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: 30px;
+      color: #C0392B;
+      text-decoration: none;
+
+      h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: 18px;
+        font-weight: 700;
+      }
+    }
+
     .icons {
       display: flex;
       flex-direction: row;
       justify-content: space-around;
-      width: 60%;
+      width: 40%;
+      margin-left: auto;
+      margin-right: 30px;
 
       p {
         padding: 0px;
-        margin: -6px;
-        color: #555454;
+        margin: -4px 0 0;
+        color: #5D4E37;
         font-size: 11px;
+        font-weight: 500;
       }
       span {
-        color: #a3a3a3;
+        color: #8B7355;
         cursor: pointer;
+        transition: color 0.3s;
       }
-      span:hover {
-        color: #2db0fc;
-      }
-      div:hover {
-        color: #2db0fc;
+      span:hover, div:hover p {
+        color: #C0392B;
       }
     }
-  }
-  .imgdiv {
-    position: relative;
-    top: 10px;
-    left: 0px;
-    img {
-      width: 50%;
-    }
-  }
-  .login {
-position: relative;
-top: 13px;
-left: 150px;
   }
 `;
 
 export const Header = () => {
-  const handlePopup = () => {
-    const popup = document.getElementById("popup");
-    popup.classList.toggle("active");
-  };
   return (
     <Icondivcss>
       <div className="icondiv">
-        <div className="imgdiv">
-        <Link to="/">
-            <img src={"https://imgak.mmtcdn.com/pwa_v3/pwa_hotel_assets/header/logo@2x.png"} alt="Logo" />
-          </Link>
-        </div>
+        <Link to="/" className="brand-small">
+          <AccountBalanceIcon style={{ fontSize: 22 }} />
+          <h3>Rajasthan Stays</h3>
+        </Link>
         <div className="icons">
           <div>
-            <span>
-              <FlightIcon style={{ fontSize: 30, padding: 4 }}></FlightIcon>
-            </span>
-            <p>Flights</p>
-          </div>
-          <div>
-            <span>
-              <HotelIcon style={{ fontSize: 30, padding: 4 }}></HotelIcon>
-            </span>
+            <span><HotelIcon style={{ fontSize: 24, padding: 2 }} /></span>
             <p>Hotels</p>
           </div>
           <div>
-            <span>
-              <HomeWorkIcon style={{ fontSize: 30, padding: 4 }}></HomeWorkIcon>
-            </span>
-            <p>Homestays</p>
+            <span><HomeWorkIcon style={{ fontSize: 24, padding: 2 }} /></span>
+            <p>Heritage</p>
           </div>
           <div>
-            <span>
-              <HolidayVillageIcon
-                style={{ fontSize: 30, padding: 4 }}
-              ></HolidayVillageIcon>
-            </span>
-            <p>Hoiday packages</p>
+            <span><AccountBalanceIcon style={{ fontSize: 24, padding: 2 }} /></span>
+            <p>Palaces</p>
           </div>
           <div>
-            <span>
-              <TrainIcon style={{ fontSize: 30, padding: 4 }}></TrainIcon>
-            </span>
-            <p>Trains</p>
+            <span><SpaIcon style={{ fontSize: 24, padding: 2 }} /></span>
+            <p>Wellness</p>
           </div>
-          <div>
-            <span>
-              <DirectionsBusFilledIcon
-                style={{ fontSize: 30, padding: 4 }}
-              ></DirectionsBusFilledIcon>
-            </span>
-            <p>Buses</p>
-          </div>
-          <div>
-            <span>
-              <LocalTaxiIcon
-                style={{ fontSize: 30, padding: 4 }}
-              ></LocalTaxiIcon>
-            </span>
-            <p>Cabs</p>
-          </div>
-          <div>
-            <span>
-              <CreditCardIcon
-                style={{ fontSize: 30, padding: 4 }}
-              ></CreditCardIcon>
-            </span>
-            <p>Visa</p>
-          </div>
-          <div>
-            <span>
-              <FlightTakeoffIcon
-                style={{ fontSize: 30, padding: 4 }}
-              ></FlightTakeoffIcon>
-            </span>
-            <p>Charter flights</p>
-          </div>
-          <div>
-            <span>
-              <DownhillSkiingIcon
-                style={{ fontSize: 30, padding: 4 }}
-              ></DownhillSkiingIcon>
-            </span>
-            <p>Activities</p>
-          </div>
-        </div>
-        <div className="login">
-        <Login handleClick={handlePopup}/>
         </div>
       </div>
     </Icondivcss>

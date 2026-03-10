@@ -1,197 +1,171 @@
-import { useState ,useEffect } from "react";
 import styled from "styled-components";
+import { cities } from "../../data/rajasthanData";
+import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
+import { Link } from "react-router-dom";
+
 const Style = styled.div`
-  height: 250px;
-  background: linear-gradient(
-    to top,
-    #030779 0%,
-    #03053b 50%,
-    #03043d 50%,
-    #020420 100%
-  );
-.jelo{
-    width: 100%;
-    background-color: #03032c;
-    .topdiv {
-    width: 90%;
-    height: 60px;
-    padding-bottom: 10px;
-    margin: auto;
+  background: linear-gradient(135deg, #922B21 0%, #C0392B 40%, #E67E22 100%);
+  padding-bottom: 30px;
+
+  .top-bar {
     display: flex;
-    justify-content: space-around;
-    padding-top: 8px;
     align-items: center;
-    .first {
-      width: 120px;
-      padding: 0;
-      margin: 0;
-      line-height: 0px;
-      text-align: center;
-      background: rgba(104, 105, 104, 0.3);
-      border-radius: 5px;
-      p {
-        font-size: 14px;
-        font-weight: 600;
-        color: #2c98f1;
-      }
-      select {
-        border: 0px;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        text-indent: 1px;
-        color: white;
-        font-size: 17px;
-        text-overflow: "";
-        outline: 0px;
-        width: 100%;
-        text-align: center;
-        background-color: transparent;
-        padding: 3px;
-      }
-      option{background-color: #7e7e7e}
-    }
-    .second {
-      width: 170px;
-      line-height: 0;
-      background: rgba(104, 105, 104, 0.3);
-      border-radius: 5px;
-      p {
-        font-size: 14px;
-        font-weight: 600;
-        margin-left: 10px;
-        color: #2c98f1;
-      }
-      select {
-        border: 0px;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        text-indent: 8px;
-        color: white;
-        font-size: 17px;
-        text-overflow: "";
-        outline: 0px;
-        width: 100%;
-        background-color: transparent;
-        padding: 3px;
-      }
-      option{background-color: #494949}
-    }
-    button {
-      width: 170px;
-      height: 45px;
-      border-radius: 25px;
-      background: linear-gradient(
-        to right,
-        #8f92fa 0%,
-        #6165f0 50%,
-        #6c70eb 50%,
-        #3339e9 100%
-      );
-      border: none;
+    justify-content: space-between;
+    padding: 16px 40px;
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       color: white;
-      font-weight: 700;
-      font-size: 20px;
+      text-decoration: none;
+
+      h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: 20px;
+      }
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+
+      a {
+        color: rgba(255,255,255,0.9);
+        font-size: 14px;
+        font-weight: 500;
+        padding: 6px 14px;
+        border-radius: 6px;
+        transition: background 0.3s;
+
+        &:hover { background: rgba(255,255,255,0.12); }
+      }
     }
   }
-}
-.hello{
-    position: fixed;
-    z-index: 100;
-    top: 0;
-    /* user-select: none; */
-}
+
+  .search-bar {
+    max-width: 1100px;
+    margin: 10px auto 0;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(8px);
+    border-radius: 12px;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+
+    .field {
+      flex: 1;
+      min-width: 140px;
+
+      label {
+        display: block;
+        font-size: 10px;
+        color: rgba(255,255,255,0.7);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 4px;
+        font-weight: 600;
+      }
+
+      select, input {
+        width: 100%;
+        padding: 8px 10px;
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 6px;
+        background: rgba(255,255,255,0.15);
+        color: white;
+        font-size: 13px;
+        font-family: 'Inter', sans-serif;
+        outline: none;
+
+        &:focus {
+          border-color: #D4A017;
+        }
+
+        option {
+          background: #922B21;
+          color: white;
+        }
+      }
+    }
+
+    button {
+      padding: 10px 28px;
+      background: #D4A017;
+      color: #2C1810;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 16px;
+
+      &:hover {
+        background: #F1C40F;
+        transform: translateY(-1px);
+      }
+    }
+  }
 `;
 
-export const SearchBox = ({handle}) => {
-  const [select,setSelect] = useState({
-    from: "",
-    to: ""
-  })
-  const [text, setText] = useState([]);
-  const handleSelect = (e)=>{
-   const {value,name} = e.target;
-   setSelect({
-     ...select,
-     [name]: value
-   })
-  }
-
-  useEffect(() => {
-    let promise = async () => {
-      const data = await fetch(
-        "https://raw.githubusercontent.com/ashhadulislam/JSON-Airports-India/master/airports.json"
-      );
-      const ans = await data.json();
-      setText(ans.airports);
-    };
-    promise();
-  }, []);
-
-
-  const handleButton = ()=>{
-    handle(select)
-  }
-    const [nav, setNav] = useState(false);
-    const handleChange = () => {
-      if (window.scrollY >= 10) {
-        setNav(true);
-      } else {
-        setNav(false);
-      }
-    };
-    window.addEventListener("scroll", handleChange);
+export const SearchBox = ({ filters, onFilter }) => {
   return (
     <Style>
-        <div className={ nav === true ? "hello jelo" : "jelo" }>
-      <div className="topdiv">
-        <div className="first">
-          <p>Trip from</p>
-          <select name="trip" id="">
-            <option value="one way">Oneway</option>
-          </select>
+      <div className="top-bar">
+        <Link to="/" className="brand">
+          <AccountBalanceIcon style={{ fontSize: 22 }} />
+          <h3>Rajasthan Stays</h3>
+        </Link>
+        <div className="nav-links">
+          <Link to="/">Home</Link>
+          <Link to="/search">Explore Hotels</Link>
         </div>
-        <div className="second">
-          <p>From</p>
-          <select onChange={handleSelect} name="from" id="">
-          {text.map((e) => (
-              <option value={e.IATA_code} key={e.IATA_code}>
-                {e.city_name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="second">
-          <p>To</p>
-          <select onChange={handleSelect} name="to" id="">
-          {text.map((e) => (
-              <option value={e.IATA_code} key={e.IATA_code}>
-                {e.city_name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="second">
-          <p>Trip from</p>
-          <select name="trip" id="">
-            <option value="one way">Oneway</option>
-          </select>
-        </div>
-        <div className="second">
-          <p>Trip from</p>
-          <select name="trip" id="">
-            <option value="one way">Oneway</option>
-          </select>
-        </div>
-        <div className="second">
-          <p>Trip from</p>
-          <select name="trip" id="">
-            <option value="one way">Oneway</option>
-          </select>
-        </div>
-        <button onClick={()=>{
-          handleButton()
-        }}>SEARCH</button>
       </div>
+      <div className="search-bar">
+        <div className="field">
+          <label>Destination</label>
+          <select
+            value={filters.city}
+            onChange={(e) => onFilter("city", e.target.value)}
+          >
+            <option value="">All Cities</option>
+            {cities.map((c) => (
+              <option value={c.id} key={c.id}>{c.name}</option>
+            ))}
+          </select>
+        </div>
+        <div className="field">
+          <label>Check-in</label>
+          <input type="date" />
+        </div>
+        <div className="field">
+          <label>Check-out</label>
+          <input type="date" />
+        </div>
+        <div className="field">
+          <label>Guests</label>
+          <select>
+            <option>2 Guests</option>
+            <option>1 Guest</option>
+            <option>3 Guests</option>
+            <option>4 Guests</option>
+          </select>
+        </div>
+        <div className="field">
+          <label>Sort By</label>
+          <select
+            value={filters.sortBy}
+            onChange={(e) => onFilter("sortBy", e.target.value)}
+          >
+            <option value="default">Recommended</option>
+            <option value="priceLow">Price: Low to High</option>
+            <option value="priceHigh">Price: High to Low</option>
+            <option value="rating">Top Rated</option>
+          </select>
+        </div>
       </div>
     </Style>
   );
