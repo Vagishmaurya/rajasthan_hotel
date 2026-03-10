@@ -183,11 +183,6 @@ export const BookingConfirmation = () => {
     }, [id, type]);
 
     const savedBooking = localStorage.getItem("bookingData");
-    let roomInfo = null;
-    if (savedBooking) {
-        const parsed = JSON.parse(savedBooking);
-        roomInfo = parsed.room;
-    }
 
     if (!item) {
         return (

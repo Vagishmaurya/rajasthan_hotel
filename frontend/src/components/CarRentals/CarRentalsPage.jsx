@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { TopNav } from "../shared/TopNav";
 import { Bottom } from "../HomePage/Bottom";
 import { carRentals, cities } from "../../data/rajasthanData";
