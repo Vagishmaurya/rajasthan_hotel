@@ -10,19 +10,20 @@ const PageWrapper = styled.div`
   background: #FDF2E9;
   min-height: 100vh;
 
-
-
   .confirmation-content {
     max-width: 700px;
     margin: 0 auto;
     padding: 60px 20px;
     text-align: center;
 
+    @media (max-width: 768px) { padding: 40px 15px; }
+
     .success-icon {
       color: #27AE60;
       font-size: 80px;
       margin-bottom: 20px;
       animation: bounceIn 0.6s ease-out;
+      @media (max-width: 480px) { font-size: 60px; }
     }
 
     @keyframes bounceIn {
@@ -36,12 +37,14 @@ const PageWrapper = styled.div`
       font-size: 36px;
       color: #2C1810;
       margin-bottom: 8px;
+      @media (max-width: 768px) { font-size: 28px; }
     }
 
     .subtitle {
       color: #8B7355;
       font-size: 16px;
       margin-bottom: 40px;
+      @media (max-width: 768px) { margin-bottom: 25px; }
     }
 
     .booking-id {
@@ -65,6 +68,8 @@ const PageWrapper = styled.div`
     text-align: left;
     margin-bottom: 30px;
 
+    @media (max-width: 480px) { padding: 20px; }
+
     .hotel-summary {
       display: flex;
       gap: 20px;
@@ -73,11 +78,18 @@ const PageWrapper = styled.div`
       border-bottom: 2px solid #F5E6D3;
       margin-bottom: 20px;
 
+      @media (max-width: 580px) {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+      }
+
       img {
         width: 140px;
         height: 100px;
         border-radius: 10px;
         object-fit: cover;
+        @media (max-width: 580px) { width: 100%; height: 180px; }
       }
 
       .info {
@@ -107,6 +119,11 @@ const PageWrapper = styled.div`
       border-bottom: 1px solid #F5E6D3;
       font-size: 14px;
 
+      @media (max-width: 400px) {
+        flex-direction: column;
+        gap: 4px;
+      }
+
       .label {
         color: #8B7355;
         font-weight: 500;
@@ -122,6 +139,12 @@ const PageWrapper = styled.div`
         padding-top: 16px;
         font-size: 18px;
 
+        @media (max-width: 400px) {
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+        }
+
         .value {
           color: #C0392B;
           font-weight: 800;
@@ -135,6 +158,10 @@ const PageWrapper = styled.div`
     gap: 16px;
     justify-content: center;
 
+    @media (max-width: 580px) {
+      flex-direction: column;
+    }
+
     a {
       padding: 14px 32px;
       border-radius: 10px;
@@ -142,6 +169,8 @@ const PageWrapper = styled.div`
       font-weight: 600;
       transition: all 0.3s;
       text-decoration: none;
+
+      @media (max-width: 580px) { text-align: center; }
     }
 
     .primary-btn {

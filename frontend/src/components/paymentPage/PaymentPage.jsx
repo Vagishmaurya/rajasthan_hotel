@@ -21,6 +21,11 @@ const PaymentWrapper = styled.div`
     grid-template-columns: 1fr 340px;
     gap: 30px;
     padding: 0 20px;
+
+    @media (max-width: 968px) {
+      grid-template-columns: 1fr;
+      margin: 20px auto;
+    }
   }
 
   .payment-main {
@@ -37,6 +42,10 @@ const PaymentWrapper = styled.div`
       justify-content: space-between;
       align-items: center;
 
+      @media (max-width: 480px) {
+        padding: 15px 20px;
+      }
+
       .brand {
         display: flex;
         align-items: center;
@@ -51,11 +60,14 @@ const PaymentWrapper = styled.div`
         gap: 6px;
         font-size: 12px;
         opacity: 0.8;
+        @media (max-width: 480px) { display: none; }
       }
     }
 
     .payment-methods {
       padding: 30px;
+
+      @media (max-width: 480px) { padding: 20px; }
 
       h2 { font-size: 20px; margin-bottom: 25px; color: #333; }
 
@@ -75,6 +87,8 @@ const PaymentWrapper = styled.div`
         cursor: pointer;
         transition: all 0.2s;
 
+        @media (max-width: 480px) { padding: 12px 15px; gap: 10px; }
+
         &:hover { border-color: #3399cc; background: #f0f7ff; }
         &.active { border-color: #3399cc; background: #f0f7ff; border-width: 2px; }
 
@@ -87,11 +101,12 @@ const PaymentWrapper = styled.div`
           align-items: center;
           justify-content: center;
           color: #3399cc;
+          flex-shrink: 0;
         }
 
         .info {
           flex: 1;
-          .name { font-weight: 600; font-size: 15px; color: #333; }
+          .name { font-weight: 600; font-size: 15px; color: #333; @media (max-width: 480px) { font-size: 14px; } }
           .sub { font-size: 12px; color: #666; margin-top: 2px; }
         }
       }
@@ -105,9 +120,12 @@ const PaymentWrapper = styled.div`
       justify-content: space-between;
       align-items: center;
 
+      @media (max-width: 480px) { flex-direction: column; gap: 15px; padding: 20px; }
+
       .total {
         .label { font-size: 12px; color: #666; }
         .amount { display: block; font-size: 22px; font-weight: 800; color: #333; }
+        @media (max-width: 480px) { text-align: center; }
       }
 
       .pay-btn {
@@ -121,6 +139,8 @@ const PaymentWrapper = styled.div`
         cursor: pointer;
         transition: background 0.3s;
 
+        @media (max-width: 480px) { width: 100%; }
+
         &:hover { background: #2b82ad; }
         &:disabled { background: #ccc; cursor: not-allowed; }
       }
@@ -133,6 +153,8 @@ const PaymentWrapper = styled.div`
     padding: 24px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.05);
     height: fit-content;
+
+    @media (max-width: 968px) { order: -1; }
 
     h3 { font-size: 18px; margin-bottom: 20px; color: #333; }
 
@@ -182,6 +204,8 @@ const PaymentWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 20px;
+    text-align: center;
 
     .spinner {
       width: 50px;
@@ -198,7 +222,7 @@ const PaymentWrapper = styled.div`
       100% { transform: rotate(360deg); }
     }
 
-    h2 { color: #333; }
+    h2 { color: #333; font-size: 24px; @media (max-width: 480px) { font-size: 20px; } }
   }
 `;
 

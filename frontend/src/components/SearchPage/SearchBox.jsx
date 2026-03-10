@@ -12,6 +12,10 @@ const Style = styled.div`
     justify-content: space-between;
     padding: 16px 40px;
 
+    @media (max-width: 768px) {
+      padding: 10px 20px;
+    }
+
     .brand {
       display: flex;
       align-items: center;
@@ -28,6 +32,10 @@ const Style = styled.div`
     .nav-links {
       display: flex;
       gap: 20px;
+
+      @media (max-width: 768px) {
+        display: none;
+      }
 
       a {
         color: rgba(255,255,255,0.9);
@@ -54,9 +62,23 @@ const Style = styled.div`
     gap: 16px;
     flex-wrap: wrap;
 
+    @media (max-width: 968px) {
+      margin: 10px 20px;
+    }
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+    }
+
     .field {
       flex: 1;
       min-width: 140px;
+
+      @media (max-width: 768px) {
+        min-width: 100%;
+      }
 
       label {
         display: block;
@@ -101,6 +123,11 @@ const Style = styled.div`
       cursor: pointer;
       transition: all 0.3s;
       margin-top: 16px;
+
+      @media (max-width: 768px) {
+        margin-top: 5px;
+        width: 100%;
+      }
 
       &:hover {
         background: #F1C40F;

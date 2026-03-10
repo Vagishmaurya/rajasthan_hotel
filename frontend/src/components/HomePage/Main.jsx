@@ -2,14 +2,19 @@ import { Navbar } from "./Navbar";
 import { Icondiv } from "./Icondiv";
 import { Fromto } from "./Fromto";
 import { Bottom } from "./Bottom";
-import { TopNav } from "../shared/TopNav";
 import { ChatBot } from "../shared/ChatBot";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { hotels, cities, offers, testimonials, carRentals, desertSafaris, popularPackages, stats } from "../../data/rajasthanData";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
-import StarIcon from "@mui/icons-material/Star";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
+import HotelIcon from "@mui/icons-material/Hotel";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
+import LandscapeIcon from "@mui/icons-material/Landscape";
+import CardTravelIcon from "@mui/icons-material/CardTravel";
+import LocalOfferIcon from "@mui/icons-material/LocalOffer";
+import StarIcon from "@mui/icons-material/Star";
 import TimerIcon from "@mui/icons-material/Timer";
 import MapIcon from "@mui/icons-material/Map";
 import PersonIcon from "@mui/icons-material/Person";
@@ -19,36 +24,86 @@ import PaymentsIcon from "@mui/icons-material/Payments";
 import SecurityIcon from "@mui/icons-material/Security";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import LocalOfferIcon from "@mui/icons-material/LocalOffer";
-import LandscapeIcon from "@mui/icons-material/Landscape";
-import CardTravelIcon from "@mui/icons-material/CardTravel";
 import styled from "styled-components";
 
 /* ═══════════════ STYLED SECTIONS ═══════════════ */
 
+const MainWrapper = styled.div`
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  /* Prevent any child elements from causing horizontal overflow */
+  & > * {
+    max-width: 100%;
+  }
+
+  /* Ensure body doesn't have horizontal scroll */
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+`;
+
 const StatsBar = styled.div`
   background: linear-gradient(135deg, #2C1810 0%, #4A2C1A 100%);
   padding: 40px 20px;
+  overflow-x: hidden;
+  
   .stats-grid {
     max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; text-align: center; color: white;
+    
+    @media (max-width: 968px) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px 15px;
+    }
+
+    @media (max-width: 480px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
     .stat-item {
-      .stat-number { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: #D4A017; display: block; }
-      .stat-label { font-size: 12px; opacity: 0.7; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px; }
+      .stat-number { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: #D4A017; display: block; 
+        @media (max-width: 768px) { font-size: 28px; }
+      }
+      .stat-label { font-size: 12px; opacity: 0.7; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px; 
+        @media (max-width: 768px) { font-size: 10px; letter-spacing: 1px; }
+      }
     }
   }
 `;
 
 const SectionTitle = styled.div`
   text-align: center; margin-bottom: 40px;
-  h2 { font-family: 'Playfair Display', serif; font-size: 38px; color: #2C1810; margin-bottom: 8px; }
-  .subtitle { color: #8B7355; font-size: 16px; max-width: 600px; margin: 0 auto; }
+  h2 { font-family: 'Playfair Display', serif; font-size: 38px; color: #2C1810; margin-bottom: 8px; 
+    @media (max-width: 768px) { font-size: 28px; }
+  }
+  .subtitle { color: #8B7355; font-size: 16px; max-width: 600px; margin: 0 auto;
+    @media (max-width: 768px) { font-size: 14px; padding: 0 15px; }
+  }
   .divider { width: 60px; height: 3px; background: linear-gradient(90deg, #C0392B, #D4A017); margin: 16px auto 0; border-radius: 2px; }
 `;
 
 const ServiceCards = styled.div`
   max-width: 1200px; margin: 0 auto; padding: 70px 20px 50px;
+  overflow-x: hidden;
+  
+  @media (max-width: 768px) {
+    padding: 50px 15px 30px;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 40px 10px 20px;
+  }
+  
   .services-grid {
     display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+    @media (max-width: 968px) { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 480px) { grid-template-columns: 1fr; }
   }
   .service-card {
     background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(44, 24, 16, 0.06);
@@ -72,7 +127,21 @@ const ServiceCards = styled.div`
 
 const CitiesSection = styled.div`
   max-width: 1200px; margin: 0 auto; padding: 70px 20px;
-  .cities-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  overflow-x: hidden;
+  
+  @media (max-width: 768px) {
+    padding: 50px 15px;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 40px 10px;
+  }
+  
+  .cities-grid { 
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; 
+    @media (max-width: 968px) { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 550px) { grid-template-columns: 1fr; }
+  }
   .city-card {
     position: relative; border-radius: 16px; overflow: hidden; height: 240px; cursor: pointer; transition: transform 0.4s, box-shadow 0.4s;
     &:hover { transform: translateY(-8px); box-shadow: 0 16px 50px rgba(44, 24, 16, 0.25); }
@@ -88,7 +157,21 @@ const CitiesSection = styled.div`
 
 const HotelsSection = styled.div`
   max-width: 1200px; margin: 0 auto; padding: 70px 20px;
-  .hotels-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  overflow-x: hidden;
+  
+  @media (max-width: 768px) {
+    padding: 50px 15px;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 40px 10px;
+  }
+  
+  .hotels-grid { 
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; 
+    @media (max-width: 968px) { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 600px) { grid-template-columns: 1fr; }
+  }
   .hotel-card {
     background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(44, 24, 16, 0.08); transition: transform 0.4s, box-shadow 0.4s; cursor: pointer;
     &:hover { transform: translateY(-8px); box-shadow: 0 16px 50px rgba(44, 24, 16, 0.18); }
@@ -127,7 +210,11 @@ const HotelsSection = styled.div`
 
 const CarPreviewSection = styled.div`
   max-width: 1200px; margin: 0 auto; padding: 70px 20px;
-  .cars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .cars-grid { 
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; 
+    @media (max-width: 968px) { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 550px) { grid-template-columns: 1fr; }
+  }
   .car-card {
     background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(44, 24, 16, 0.06); transition: transform 0.4s, box-shadow 0.4s;
     &:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(44, 24, 16, 0.15); }
@@ -159,7 +246,11 @@ const CarPreviewSection = styled.div`
 
 const SafariPreviewSection = styled.div`
   max-width: 1200px; margin: 0 auto; padding: 70px 20px;
-  .safari-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .safari-grid { 
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; 
+    @media (max-width: 968px) { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 550px) { grid-template-columns: 1fr; }
+  }
   .safari-card {
     background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(44, 24, 16, 0.06); transition: transform 0.4s, box-shadow 0.4s;
     &:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(44, 24, 16, 0.15); }
@@ -189,7 +280,21 @@ const SafariPreviewSection = styled.div`
 
 const OffersSection = styled.div`
   max-width: 1200px; margin: 0 auto; padding: 70px 20px;
-  .offers-scroll { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  overflow-x: hidden;
+  
+  @media (max-width: 768px) {
+    padding: 50px 15px;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 40px 10px;
+  }
+  
+  .offers-scroll { 
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; 
+    @media (max-width: 968px) { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 650px) { grid-template-columns: 1fr; }
+  }
   .offer-card {
     border-radius: 14px; padding: 28px 24px; color: white; position: relative; overflow: hidden; transition: transform 0.3s; cursor: pointer;
     &:hover { transform: translateY(-4px); }
@@ -202,7 +307,11 @@ const OffersSection = styled.div`
 
 const WhyUsSection = styled.div`
   max-width: 1200px; margin: 0 auto; padding: 70px 20px;
-  .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .why-grid { 
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; 
+    @media (max-width: 968px) { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 480px) { grid-template-columns: 1fr; }
+  }
   .why-card {
     text-align: center; padding: 30px 20px; background: white; border-radius: 16px; transition: transform 0.3s, box-shadow 0.3s; box-shadow: 0 4px 16px rgba(44, 24, 16, 0.04);
     &:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(44, 24, 16, 0.1); }
@@ -214,7 +323,11 @@ const WhyUsSection = styled.div`
 
 const TestimonialsSection = styled.div`
   max-width: 1200px; margin: 0 auto; padding: 70px 20px;
-  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .testimonials-grid { 
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; 
+    @media (max-width: 968px) { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 650px) { grid-template-columns: 1fr; }
+  }
   .testimonial-card {
     background: white; padding: 28px; border-radius: 16px; box-shadow: 0 4px 20px rgba(44, 24, 16, 0.05); border-left: 4px solid #D4A017; transition: transform 0.3s;
     &:hover { transform: translateY(-4px); }
@@ -232,6 +345,7 @@ const TestimonialsSection = styled.div`
 
 export const Main = () => {
   const [searchData, setSearchData] = useState({ city: "", checkin: "", checkout: "", guests: "2" });
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleData = (e) => {
     const { name, value } = e.target;
@@ -242,11 +356,18 @@ export const Main = () => {
     localStorage.setItem("searchData", JSON.stringify(searchData));
   };
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   const featuredHotels = hotels.slice(0, 6);
 
   return (
-    <div>
-      <TopNav />
+    <MainWrapper>
       <Navbar>
         <div className="topdiv">
           <Link to="/" className="brand">
@@ -256,14 +377,28 @@ export const Main = () => {
               <span>Heritage Hotel Booking</span>
             </div>
           </Link>
-          <div className="nav-links">
-            <Link to="/search">Hotels</Link>
-            <Link to="/car-rentals">Car Rentals</Link>
-            <Link to="/desert-safari">Desert Safari</Link>
-            <Link to="/packages">Packages</Link>
-            <a href="#offers">Offers</a>
+          <button className="mobile-menu-toggle" onClick={toggleMobileMenu}>
+            {isMobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+          </button>
+          <div className={`nav-links ${isMobileMenuOpen ? 'active' : ''}`}>
+            <Link to="/search" onClick={closeMobileMenu}>
+              <HotelIcon /> Hotels
+            </Link>
+            <Link to="/car-rentals" onClick={closeMobileMenu}>
+              <DirectionsCarIcon /> Car Rentals
+            </Link>
+            <Link to="/desert-safari" onClick={closeMobileMenu}>
+              <LandscapeIcon /> Desert Safari
+            </Link>
+            <Link to="/packages" onClick={closeMobileMenu}>
+              <CardTravelIcon /> Packages
+            </Link>
+            <a href="#offers" onClick={closeMobileMenu}>
+              <LocalOfferIcon /> Offers
+            </a>
           </div>
         </div>
+        <div className={`mobile-overlay ${isMobileMenuOpen ? 'active' : ''}`} onClick={closeMobileMenu}></div>
 
         <Icondiv />
 
@@ -553,6 +688,6 @@ export const Main = () => {
         <Bottom />
       </div>
       <ChatBot />
-    </div>
+    </MainWrapper>
   );
 };

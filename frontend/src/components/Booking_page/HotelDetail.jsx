@@ -45,6 +45,16 @@ const PageWrapper = styled.div`
     margin-bottom: 30px;
     height: 400px;
 
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+      height: 300px;
+    }
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+      height: 250px;
+    }
+
     img {
       width: 100%;
       height: 100%;
@@ -53,12 +63,24 @@ const PageWrapper = styled.div`
       cursor: pointer;
 
       &:hover { transform: scale(1.03); }
+
+      @media (max-width: 480px) {
+        &:not(:first-child) { display: none; }
+      }
     }
 
     .gallery-right {
       display: flex;
       flex-direction: column;
       gap: 8px;
+
+      @media (max-width: 768px) {
+        grid-column: span 1;
+      }
+
+      @media (max-width: 480px) {
+        display: none;
+      }
 
       img { flex: 1; }
     }
@@ -68,6 +90,10 @@ const PageWrapper = styled.div`
     display: grid;
     grid-template-columns: 1fr 360px;
     gap: 30px;
+
+    @media (max-width: 968px) {
+      grid-template-columns: 1fr;
+    }
   }
 
   .hotel-main {
@@ -91,6 +117,7 @@ const PageWrapper = styled.div`
         font-size: 34px;
         color: #2C1810;
         margin-bottom: 6px;
+        @media (max-width: 768px) { font-size: 28px; }
       }
 
       .location {
@@ -103,6 +130,7 @@ const PageWrapper = styled.div`
         display: flex;
         align-items: center;
         gap: 8px;
+        flex-wrap: wrap;
 
         .rating-badge {
           background: #27AE60;
@@ -132,6 +160,7 @@ const PageWrapper = styled.div`
       padding: 24px;
       margin-bottom: 20px;
       box-shadow: 0 4px 20px rgba(44, 24, 16, 0.04);
+      @media (max-width: 480px) { padding: 18px; }
 
       h2 {
         font-family: 'Playfair Display', serif;
@@ -152,6 +181,8 @@ const PageWrapper = styled.div`
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 14px;
+        @media (max-width: 600px) { grid-template-columns: repeat(2, 1fr); }
+        @media (max-width: 400px) { grid-template-columns: 1fr; }
 
         .amenity-item {
           display: flex;
@@ -163,7 +194,7 @@ const PageWrapper = styled.div`
           font-size: 14px;
           color: #5D4E37;
 
-          svg { color: #D4A017; }
+          svg { color: #D4A017; flex-shrink: 0; }
         }
       }
     }
@@ -177,6 +208,12 @@ const PageWrapper = styled.div`
     height: fit-content;
     position: sticky;
     top: 80px;
+
+    @media (max-width: 968px) {
+      position: relative;
+      top: 0;
+      padding: 24px;
+    }
 
     .price-header {
       margin-bottom: 20px;
@@ -194,6 +231,7 @@ const PageWrapper = styled.div`
         font-family: 'Inter', sans-serif;
         display: block;
         line-height: 1.1;
+        @media (max-width: 480px) { font-size: 30px; }
       }
 
       .per-night {
@@ -295,6 +333,7 @@ const PageWrapper = styled.div`
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 10px;
+        @media (max-width: 400px) { grid-template-columns: 1fr; }
       }
     }
 

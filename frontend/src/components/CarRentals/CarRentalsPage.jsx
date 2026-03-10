@@ -21,6 +21,10 @@ const HeroBanner = styled.div`
   text-align: center;
   color: white;
 
+  @media (max-width: 768px) {
+    padding: 40px 15px 30px;
+  }
+
   &::before {
     content: '';
     position: absolute;
@@ -36,9 +40,15 @@ const HeroBanner = styled.div`
     font-size: 44px;
     margin-bottom: 10px;
     text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+
+    @media (max-width: 768px) {
+      font-size: 32px;
+    }
   }
 
-  p { font-size: 18px; opacity: 0.9; max-width: 600px; margin: 0 auto 30px; }
+  p { font-size: 18px; opacity: 0.9; max-width: 600px; margin: 0 auto 30px; 
+    @media (max-width: 768px) { font-size: 15px; }
+  }
 
   .search-bar {
     max-width: 800px;
@@ -51,7 +61,18 @@ const HeroBanner = styled.div`
     align-items: flex-end;
     box-shadow: 0 15px 50px rgba(0,0,0,0.2);
 
+    @media (max-width: 968px) {
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 650px) {
+      flex-direction: column;
+      align-items: stretch;
+      padding: 15px;
+    }
+
     .field { flex: 1;
+      @media (max-width: 650px) { width: 100%; }
       label { display: block; font-size: 11px; font-weight: 600; color: #8B7355; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 5px; }
       select, input { width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 8px; font-size: 14px; font-family: 'Inter', sans-serif; outline: none;
         &:focus { border-color: #2980B9; }
@@ -69,6 +90,12 @@ const HeroBanner = styled.div`
       cursor: pointer;
       transition: all 0.3s;
       white-space: nowrap;
+
+      @media (max-width: 650px) {
+        width: 100%;
+        margin-top: 5px;
+      }
+
       &:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(41, 128, 185, 0.4); }
     }
   }
@@ -79,8 +106,15 @@ const HeroBanner = styled.div`
     gap: 50px;
     margin-top: 30px;
 
+    @media (max-width: 768px) {
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
     .stat { text-align: center;
-      .num { font-size: 28px; font-weight: 700; font-family: 'Playfair Display', serif; }
+      .num { font-size: 28px; font-weight: 700; font-family: 'Playfair Display', serif; 
+        @media (max-width: 768px) { font-size: 22px; }
+      }
       .lbl { font-size: 12px; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; }
     }
   }
@@ -89,11 +123,15 @@ const HeroBanner = styled.div`
 const Content = styled.div`
   background: #FDF2E9;
 
-  .page-inner { max-width: 1200px; margin: 0 auto; padding: 50px 20px; }
+  .page-inner { max-width: 1200px; margin: 0 auto; padding: 50px 20px; 
+    @media (max-width: 768px) { padding: 30px 15px; }
+  }
 
   .section-title {
     text-align: center; margin-bottom: 40px;
-    h2 { font-family: 'Playfair Display', serif; font-size: 34px; color: #2C1810; margin-bottom: 6px; }
+    h2 { font-family: 'Playfair Display', serif; font-size: 34px; color: #2C1810; margin-bottom: 6px; 
+      @media (max-width: 768px) { font-size: 26px; }
+    }
     p { color: #8B7355; font-size: 15px; }
     .line { width: 50px; height: 3px; background: linear-gradient(90deg, #2980B9, #3498DB); margin: 14px auto 0; border-radius: 2px; }
   }
@@ -102,6 +140,7 @@ const Content = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 28px;
+    @media (max-width: 1024px) { grid-template-columns: 1fr; }
   }
 
   .car-card {
@@ -113,10 +152,15 @@ const Content = styled.div`
     box-shadow: 0 4px 20px rgba(44, 24, 16, 0.06);
     transition: transform 0.4s, box-shadow 0.4s;
 
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+
     &:hover { transform: translateY(-6px); box-shadow: 0 16px 50px rgba(44, 24, 16, 0.15); }
 
     .car-img {
       overflow: hidden; position: relative; min-height: 280px;
+      @media (max-width: 768px) { min-height: 200px; height: 200px; }
       img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
       .type-tag { position: absolute; top: 14px; left: 14px; background: rgba(41, 128, 185, 0.9); color: white; padding: 5px 14px; border-radius: 8px; font-size: 12px; font-weight: 700; }
       .pax { position: absolute; top: 14px; right: 14px; background: rgba(255,255,255,0.9); color: #2C1810; padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 4px; }
@@ -126,7 +170,11 @@ const Content = styled.div`
     .car-info {
       padding: 22px 26px; display: flex; flex-direction: column;
 
-      h3 { font-family: 'Playfair Display', serif; font-size: 22px; color: #2C1810; margin-bottom: 4px; }
+      @media (max-width: 480px) { padding: 18px; }
+
+      h3 { font-family: 'Playfair Display', serif; font-size: 22px; color: #2C1810; margin-bottom: 4px; 
+        @media (max-width: 480px) { font-size: 19px; }
+      }
       .vehicle { font-size: 14px; color: #2980B9; font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
       .route { font-size: 13px; color: #5D4E37; margin-bottom: 12px; line-height: 1.5; display: flex; gap: 8px; }
 
@@ -147,12 +195,33 @@ const Content = styled.div`
       .price-row {
         display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 14px; border-top: 2px solid #F5E6D3;
 
+        @media (max-width: 420px) { flex-direction: column; align-items: stretch; gap: 15px; }
+
         .price { .total { font-size: 28px; font-weight: 800; color: #2980B9; font-family: 'Inter', sans-serif; }
           .per-day { font-size: 12px; color: #8B7355; display: block; }
         }
 
-        .rent-btn { padding: 12px 28px; background: linear-gradient(135deg, #2980B9, #3498DB); color: white; border: none; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.3s;
-          &:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(41, 128, 185, 0.35); }
+        .book-btn { 
+          padding: 14px 32px; 
+          background: linear-gradient(135deg, #2980B9, #2C1810); 
+          color: white; 
+          border: none; 
+          border-radius: 12px; 
+          font-size: 16px; 
+          font-weight: 700; 
+          cursor: pointer; 
+          transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          box-shadow: 0 4px 15px rgba(41, 128, 185, 0.2);
+          
+          &:hover { 
+            transform: translateY(-3px) scale(1.02); 
+            box-shadow: 0 8px 25px rgba(41, 128, 185, 0.4); 
+            background: linear-gradient(135deg, #3498DB, #2C1810);
+          }
+
+          &:active {
+            transform: translateY(-1px);
+          }
         }
       }
     }
@@ -164,9 +233,12 @@ const Content = styled.div`
     border-radius: 16px;
     padding: 40px;
     box-shadow: 0 4px 20px rgba(44, 24, 16, 0.04);
+    @media (max-width: 768px) { padding: 25px 20px; }
 
     .why-grid {
       display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 30px;
+      @media (max-width: 968px) { grid-template-columns: repeat(2, 1fr); }
+      @media (max-width: 480px) { grid-template-columns: 1fr; }
 
       .why-item {
         text-align: center;

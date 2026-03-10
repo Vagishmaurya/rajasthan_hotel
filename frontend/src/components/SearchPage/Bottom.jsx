@@ -17,6 +17,11 @@ const Style = styled.div`
   padding: 30px 20px 60px;
   min-height: 60vh;
 
+  @media (max-width: 968px) {
+    grid-template-columns: 1fr;
+    padding-top: 10px;
+  }
+
   .filters {
     background: white;
     border-radius: 14px;
@@ -25,6 +30,13 @@ const Style = styled.div`
     height: fit-content;
     position: sticky;
     top: 80px;
+
+    @media (max-width: 968px) {
+      position: relative;
+      top: 0;
+      margin-bottom: 20px;
+      display: none; /* Hide for now on mobile unless user wants a toggle */
+    }
 
     h3 {
       font-family: 'Playfair Display', serif;
@@ -103,6 +115,12 @@ const Style = styled.div`
       align-items: center;
       margin-bottom: 20px;
 
+      @media (max-width: 480px) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+
       h2 {
         font-family: 'Playfair Display', serif;
         font-size: 24px;
@@ -146,6 +164,10 @@ const Style = styled.div`
       text-decoration: none;
       color: inherit;
 
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+
       &:hover {
         transform: translateY(-3px);
         box-shadow: 0 8px 30px rgba(44, 24, 16, 0.12);
@@ -155,6 +177,10 @@ const Style = styled.div`
         height: 240px;
         overflow: hidden;
         position: relative;
+
+        @media (max-width: 768px) {
+          height: 200px;
+        }
 
         img {
           width: 100%;
@@ -198,11 +224,19 @@ const Style = styled.div`
         display: flex;
         flex-direction: column;
 
+        @media (max-width: 480px) {
+          padding: 16px;
+        }
+
         h3 {
           font-family: 'Playfair Display', serif;
           font-size: 22px;
           color: #2C1810;
           margin-bottom: 4px;
+
+          @media (max-width: 480px) {
+            font-size: 18px;
+          }
         }
 
         .city {
