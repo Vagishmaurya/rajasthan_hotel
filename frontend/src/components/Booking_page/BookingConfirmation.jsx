@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
-import { hotels, cities } from "../../data/rajasthanData";
+import { hotels, cities, carRentals, desertSafaris, popularPackages } from "../../data/rajasthanData";
 import { TopNav } from "../shared/TopNav";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import StarIcon from "@mui/icons-material/Star";
@@ -167,7 +168,19 @@ const PageWrapper = styled.div`
 
 export const BookingConfirmation = () => {
     const { id } = useParams();
-    const hotel = hotels.find((h) => h.id === Number(id));
+    const [item, setItem] = useState(null);
+    const params = new URLSearchParams(window.location.search);
+    const type = params.get("type") || "hotel";
+
+    useEffect(() => {
+        let found = null;
+        if (type === "hotel") found = hotels.find(h => h.id === Number(id));
+        else if (type === "car") found = carRentals.find(c => c.id === Number(id));
+        else if (type === "safari") found = desertSafaris.find(s => s.id === Number(id));
+        else if (type === "package") found = popularPackages.find(p => p.id === Number(id));
+
+        if (found) setItem(found);
+    }, [id, type]);
 
     const savedBooking = localStorage.getItem("bookingData");
     let roomInfo = null;
@@ -176,7 +189,7 @@ export const BookingConfirmation = () => {
         roomInfo = parsed.room;
     }
 
-    if (!hotel) {
+    if (!item) {
         return (
             <PageWrapper>
                 <div className="confirmation-content" style={{ paddingTop: "100px" }}>
@@ -187,12 +200,12 @@ export const BookingConfirmation = () => {
         );
     }
 
-    const cityObj = cities.find((c) => c.id === hotel.city);
-    const room = roomInfo || hotel.rooms[0];
+    const cityObj = cities.find((c) => c.id === (item.city || ""));
+    const price = item.pricePerNight || item.totalPrice || item.price;
     const bookingId = `RS${Date.now().toString().slice(-8)}`;
-    const nights = 2;
-    const taxes = Math.round(room.price * nights * 0.18);
-    const total = room.price * nights + taxes;
+    const nights = 1;
+    const taxes = Math.round(price * nights * 0.18);
+    const total = price * nights + taxes;
 
     return (
         <PageWrapper>
@@ -206,12 +219,12 @@ export const BookingConfirmation = () => {
 
                 <div className="booking-details">
                     <div className="hotel-summary">
-                        <img src={hotel.image} alt={hotel.name} />
+                        <img src={item.image} alt={item.name} />
                         <div className="info">
-                            <h3>{hotel.name}</h3>
-                            <p className="city">{cityObj ? cityObj.name : hotel.city}, Rajasthan</p>
+                            <h3>{item.name}</h3>
+                            <p className="city">{cityObj ? cityObj.name : (item.location || item.city || "Rajasthan")}</p>
                             <div className="stars">
-                                {Array.from({ length: hotel.stars }).map((_, i) => (
+                                {Array.from({ length: item.stars || 4 }).map((_, i) => (
                                     <StarIcon key={i} style={{ fontSize: 16 }} />
                                 ))}
                             </div>
@@ -219,28 +232,13 @@ export const BookingConfirmation = () => {
                     </div>
 
                     <div className="detail-row">
-                        <span className="label">Room Type</span>
-                        <span className="value">{room.type}</span>
+                        <span className="label">Service Type</span>
+                        <span className="value">{type.toUpperCase()}</span>
                     </div>
+
                     <div className="detail-row">
-                        <span className="label">Guests</span>
-                        <span className="value">Up to {room.capacity} guests</span>
-                    </div>
-                    <div className="detail-row">
-                        <span className="label">Check-in</span>
-                        <span className="value">15 Mar 2026, 2:00 PM</span>
-                    </div>
-                    <div className="detail-row">
-                        <span className="label">Check-out</span>
-                        <span className="value">17 Mar 2026, 11:00 AM</span>
-                    </div>
-                    <div className="detail-row">
-                        <span className="label">Duration</span>
-                        <span className="value">{nights} Nights</span>
-                    </div>
-                    <div className="detail-row">
-                        <span className="label">Room Rate</span>
-                        <span className="value">₹{room.price.toLocaleString()} × {nights} nights</span>
+                        <span className="label">Rate</span>
+                        <span className="value">₹{price.toLocaleString()}</span>
                     </div>
                     <div className="detail-row">
                         <span className="label">Taxes & Fees (18% GST)</span>

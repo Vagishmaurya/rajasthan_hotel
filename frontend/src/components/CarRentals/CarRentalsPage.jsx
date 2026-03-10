@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { TopNav } from "../shared/TopNav";
 import { Bottom } from "../HomePage/Bottom";
 import { carRentals, cities } from "../../data/rajasthanData";
@@ -178,6 +179,16 @@ const Content = styled.div`
 `;
 
 export const CarRentalsPage = () => {
+    const navigate = useNavigate();
+
+    const handleRent = (car) => {
+        localStorage.setItem("bookingData", JSON.stringify({
+            type: "car",
+            item: car,
+            bookedAt: new Date().toISOString()
+        }));
+        navigate(`/payment/${car.id}`);
+    };
     const [pickupCity, setPickupCity] = useState("");
 
     const filteredCars = pickupCity
@@ -264,7 +275,7 @@ export const CarRentalsPage = () => {
                                             <span className="total">₹{car.totalPrice.toLocaleString()}</span>
                                             <span className="per-day">₹{car.pricePerDay.toLocaleString()}/day</span>
                                         </div>
-                                        <button className="rent-btn">Book Now</button>
+                                        <button className="book-btn" onClick={() => handleRent(car)}>Rent Now</button>
                                     </div>
                                 </div>
                             </div>

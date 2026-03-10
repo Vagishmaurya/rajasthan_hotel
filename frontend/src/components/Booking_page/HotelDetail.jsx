@@ -373,10 +373,11 @@ export const HotelDetail = () => {
         const bookingData = {
             hotel,
             room: hotel.rooms[selectedRoom],
+            type: 'hotel',
             bookedAt: new Date().toISOString(),
         };
         localStorage.setItem("bookingData", JSON.stringify(bookingData));
-        navigate(`/booking/${hotel.id}`);
+        navigate(`/payment/${hotel.id}`);
     };
 
     return (

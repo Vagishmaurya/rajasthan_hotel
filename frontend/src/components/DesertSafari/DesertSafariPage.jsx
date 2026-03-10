@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { TopNav } from "../shared/TopNav";
 import { Bottom } from "../HomePage/Bottom";
 import { desertSafaris } from "../../data/rajasthanData";
@@ -138,96 +139,106 @@ const Content = styled.div`
 `;
 
 export const DesertSafariPage = () => {
-    const [locFilter, setLocFilter] = useState("");
+  const navigate = useNavigate();
 
-    const filtered = locFilter
-        ? desertSafaris.filter(s => s.location.toLowerCase().includes(locFilter.toLowerCase()))
-        : desertSafaris;
+  const handleBook = (safari) => {
+    localStorage.setItem("bookingData", JSON.stringify({
+      type: "safari",
+      item: safari,
+      bookedAt: new Date().toISOString()
+    }));
+    navigate(`/payment/${safari.id}`);
+  };
+  const [locFilter, setLocFilter] = useState("");
 
-    return (
-        <div>
-            <TopNav />
-            <HeroBanner>
-                <h1>Desert Safaris & Adventures</h1>
-                <p>Thrilling camel rides, dune bashing, cultural shows & overnight camps under the stars of the Thar Desert</p>
-                <div className="filter-bar">
-                    <div className="field">
-                        <label>Location</label>
-                        <select value={locFilter} onChange={e => setLocFilter(e.target.value)}>
-                            <option value="">All Locations</option>
-                            <option value="Jaisalmer">Jaisalmer</option>
-                            <option value="Jodhpur">Jodhpur</option>
-                            <option value="Pushkar">Pushkar</option>
-                            <option value="Jaipur">Jaipur</option>
-                        </select>
-                    </div>
-                    <div className="field">
-                        <label>Date</label>
-                        <select><option>Choose Date</option><option>This Weekend</option><option>Next Week</option><option>Custom Date</option></select>
-                    </div>
-                    <div className="field">
-                        <label>Group Size</label>
-                        <select><option>2 People</option><option>4 People</option><option>6 People</option><option>10+ People</option></select>
-                    </div>
-                    <button className="search-btn">Find Safaris</button>
-                </div>
-                <div className="highlights-row">
-                    <div className="hl"><CameraAltIcon /> Photography Tours</div>
-                    <div className="hl"><NightsStayIcon /> Overnight Stays</div>
-                    <div className="hl"><LocalFireDepartmentIcon /> Bonfire Nights</div>
-                    <div className="hl"><MusicNoteIcon /> Cultural Shows</div>
-                </div>
-            </HeroBanner>
+  const filtered = locFilter
+    ? desertSafaris.filter(s => s.location.toLowerCase().includes(locFilter.toLowerCase()))
+    : desertSafaris;
 
-            <Content>
-                <div className="page-inner">
-                    <div className="section-title">
-                        <h2>{locFilter ? `Safaris in ${locFilter}` : "All Desert Safaris & Adventures"}</h2>
-                        <p>Hand-curated experiences — from serene camel rides to adrenaline-pumping dune bashing</p>
-                        <div className="line" />
-                    </div>
-
-                    <div className="safari-grid">
-                        {filtered.map(safari => (
-                            <div className="safari-card" key={safari.id}>
-                                <div className="safari-img">
-                                    <img src={safari.image} alt={safari.name} />
-                                    <div className="duration-tag"><AccessTimeIcon style={{ fontSize: 14 }} /> {safari.duration}</div>
-                                    <div className="rating-tag"><StarIcon style={{ fontSize: 14 }} /> {safari.rating}</div>
-                                    <div className="group-tag"><GroupIcon style={{ fontSize: 14 }} /> {safari.groupSize} people</div>
-                                </div>
-                                <div className="safari-info">
-                                    <h3>{safari.name}</h3>
-                                    <p className="location"><LocationOnIcon style={{ fontSize: 15 }} /> {safari.location}</p>
-                                    <p className="description">{safari.description}</p>
-                                    <div className="highlights">
-                                        {safari.highlights.slice(0, 4).map((h, i) => (
-                                            <span key={i}><CheckCircleIcon /> {h}</span>
-                                        ))}
-                                    </div>
-                                    <p className="reviews-line">⭐ {safari.reviews} verified reviews</p>
-                                    <div className="price-row">
-                                        <div className="price">
-                                            <span className="original">₹{safari.originalPrice.toLocaleString()}</span>
-                                            <span className="current">₹{safari.price.toLocaleString()}</span>
-                                            <span className="per">per person</span>
-                                        </div>
-                                        <button className="book-btn">Book Safari</button>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    <div className="experience-strip">
-                        <div className="exp-item"><span className="icon">🐪</span><h4>Camel Safaris</h4><p>Glide across golden dunes at sunset on decorated camels</p></div>
-                        <div className="exp-item"><span className="icon">🏕️</span><h4>Desert Camping</h4><p>Luxury tents under a canopy of a billion stars</p></div>
-                        <div className="exp-item"><span className="icon">💃</span><h4>Folk Performances</h4><p>Kalbeliya & Ghoomar dance by bonfire light</p></div>
-                        <div className="exp-item"><span className="icon">🏜️</span><h4>Dune Bashing</h4><p>Adrenaline-filled 4x4 rides over massive sand dunes</p></div>
-                    </div>
-                </div>
-            </Content>
-            <Bottom />
+  return (
+    <div>
+      <TopNav />
+      <HeroBanner>
+        <h1>Desert Safaris & Adventures</h1>
+        <p>Thrilling camel rides, dune bashing, cultural shows & overnight camps under the stars of the Thar Desert</p>
+        <div className="filter-bar">
+          <div className="field">
+            <label>Location</label>
+            <select value={locFilter} onChange={e => setLocFilter(e.target.value)}>
+              <option value="">All Locations</option>
+              <option value="Jaisalmer">Jaisalmer</option>
+              <option value="Jodhpur">Jodhpur</option>
+              <option value="Pushkar">Pushkar</option>
+              <option value="Jaipur">Jaipur</option>
+            </select>
+          </div>
+          <div className="field">
+            <label>Date</label>
+            <select><option>Choose Date</option><option>This Weekend</option><option>Next Week</option><option>Custom Date</option></select>
+          </div>
+          <div className="field">
+            <label>Group Size</label>
+            <select><option>2 People</option><option>4 People</option><option>6 People</option><option>10+ People</option></select>
+          </div>
+          <button className="search-btn">Find Safaris</button>
         </div>
-    );
+        <div className="highlights-row">
+          <div className="hl"><CameraAltIcon /> Photography Tours</div>
+          <div className="hl"><NightsStayIcon /> Overnight Stays</div>
+          <div className="hl"><LocalFireDepartmentIcon /> Bonfire Nights</div>
+          <div className="hl"><MusicNoteIcon /> Cultural Shows</div>
+        </div>
+      </HeroBanner>
+
+      <Content>
+        <div className="page-inner">
+          <div className="section-title">
+            <h2>{locFilter ? `Safaris in ${locFilter}` : "All Desert Safaris & Adventures"}</h2>
+            <p>Hand-curated experiences — from serene camel rides to adrenaline-pumping dune bashing</p>
+            <div className="line" />
+          </div>
+
+          <div className="safari-grid">
+            {filtered.map(safari => (
+              <div className="safari-card" key={safari.id}>
+                <div className="safari-img">
+                  <img src={safari.image} alt={safari.name} />
+                  <div className="duration-tag"><AccessTimeIcon style={{ fontSize: 14 }} /> {safari.duration}</div>
+                  <div className="rating-tag"><StarIcon style={{ fontSize: 14 }} /> {safari.rating}</div>
+                  <div className="group-tag"><GroupIcon style={{ fontSize: 14 }} /> {safari.groupSize} people</div>
+                </div>
+                <div className="safari-info">
+                  <h3>{safari.name}</h3>
+                  <p className="location"><LocationOnIcon style={{ fontSize: 15 }} /> {safari.location}</p>
+                  <p className="description">{safari.description}</p>
+                  <div className="highlights">
+                    {safari.highlights.slice(0, 4).map((h, i) => (
+                      <span key={i}><CheckCircleIcon /> {h}</span>
+                    ))}
+                  </div>
+                  <p className="reviews-line">⭐ {safari.reviews} verified reviews</p>
+                  <div className="price-row">
+                    <div className="price">
+                      <span className="original">₹{safari.originalPrice.toLocaleString()}</span>
+                      <span className="current">₹{safari.price.toLocaleString()}</span>
+                      <span className="per">per person</span>
+                    </div>
+                    <button className="book-btn" onClick={() => handleBook(safari)}>Book Safari</button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="experience-strip">
+            <div className="exp-item"><span className="icon">🐪</span><h4>Camel Safaris</h4><p>Glide across golden dunes at sunset on decorated camels</p></div>
+            <div className="exp-item"><span className="icon">🏕️</span><h4>Desert Camping</h4><p>Luxury tents under a canopy of a billion stars</p></div>
+            <div className="exp-item"><span className="icon">💃</span><h4>Folk Performances</h4><p>Kalbeliya & Ghoomar dance by bonfire light</p></div>
+            <div className="exp-item"><span className="icon">🏜️</span><h4>Dune Bashing</h4><p>Adrenaline-filled 4x4 rides over massive sand dunes</p></div>
+          </div>
+        </div>
+      </Content>
+      <Bottom />
+    </div>
+  );
 };

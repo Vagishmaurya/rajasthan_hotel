@@ -6,6 +6,7 @@ import { BookingConfirmation } from "./components/Booking_page/BookingConfirmati
 import { CarRentalsPage } from "./components/CarRentals/CarRentalsPage";
 import { DesertSafariPage } from "./components/DesertSafari/DesertSafariPage";
 import { PackagesPage } from "./components/Packages/PackagesPage";
+import { PaymentPage } from "./components/paymentPage/PaymentPage";
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
         <Route path="/" exact element={<Main />} />
         <Route path="/search" exact element={<Search />} />
         <Route path="/hotel/:id" exact element={<HotelDetail />} />
-        <Route path="/booking/:id" exact element={<BookingConfirmation />} />
+        <Route path="/payment/:id" exact element={<PaymentPage />} />
+        <Route path="/booking-confirmation/:id" exact element={<BookingConfirmation />} />
         <Route path="/car-rentals" exact element={<CarRentalsPage />} />
         <Route path="/desert-safari" exact element={<DesertSafariPage />} />
         <Route path="/packages" exact element={<PackagesPage />} />

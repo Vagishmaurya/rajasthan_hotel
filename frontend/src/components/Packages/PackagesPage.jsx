@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { TopNav } from "../shared/TopNav";
+import { useNavigate } from "react-router-dom";
 import { Bottom } from "../HomePage/Bottom";
 import { popularPackages, cities } from "../../data/rajasthanData";
 import styled from "styled-components";
@@ -173,6 +174,17 @@ const includeIcons = {
 };
 
 export const PackagesPage = () => {
+  const navigate = useNavigate();
+
+  const handleBook = (pkg) => {
+    localStorage.setItem("bookingData", JSON.stringify({
+      type: "package",
+      item: pkg,
+      bookedAt: new Date().toISOString()
+    }));
+    navigate(`/payment/${pkg.id}`);
+  };
+
   const [durationFilter, setDurationFilter] = useState("");
 
   const filtered = durationFilter
@@ -281,8 +293,8 @@ export const PackagesPage = () => {
                         <span className="current">₹{pkg.price.toLocaleString()}</span>
                         <span className="per">per person</span>
                         <span className="save">You save ₹{saving.toLocaleString()}</span>
+                        <button className="book-btn" onClick={() => handleBook(pkg)}>Book Package</button>
                       </div>
-                      <button className="book-btn">Book Package</button>
                     </div>
                   </div>
                 </div>

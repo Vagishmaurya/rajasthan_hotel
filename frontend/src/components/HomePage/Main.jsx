@@ -3,6 +3,7 @@ import { Icondiv } from "./Icondiv";
 import { Fromto } from "./Fromto";
 import { Bottom } from "./Bottom";
 import { TopNav } from "../shared/TopNav";
+import { ChatBot } from "../shared/ChatBot";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { hotels, cities, offers, testimonials, carRentals, desertSafaris, popularPackages, stats } from "../../data/rajasthanData";
@@ -551,6 +552,7 @@ export const Main = () => {
 
         <Bottom />
       </div>
+      <ChatBot />
     </div>
   );
 };
