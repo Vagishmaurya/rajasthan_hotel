@@ -315,7 +315,7 @@ export const Main = () => {
             </Link>
             <Link to="/car-rentals" className="service-card">
               <div className="card-img">
-                <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0afa?w=400&h=250&fit=crop" alt="Cars" />
+                <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=400&h=250&fit=crop" alt="Cars" />
                 <div className="card-overlay"><div className="icon-circle" style={{ color: '#2980B9' }}><DirectionsCarIcon style={{ fontSize: 26 }} /></div></div>
               </div>
               <div className="card-info">
